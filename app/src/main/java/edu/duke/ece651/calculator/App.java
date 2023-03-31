@@ -60,16 +60,16 @@ public class App extends Application {
     // XML
     URL xmlResource = getClass().getResource("/ui/calcbuttons.xml");
     GridPane gp = FXMLLoader.load(xmlResource);
-    for (int i = 0; i < 4; i++) {
-      ColumnConstraints cc = new ColumnConstraints();
-      cc.setPercentWidth(25);
-      gp.getColumnConstraints().add(cc);
-    }
-    for (int i = 0; i < 5; i++) {
-      RowConstraints rc = new RowConstraints();
-      rc.setPercentHeight(20);
-      gp.getRowConstraints().add(rc);
-    }
+    // for (int i = 0; i < 4; i++) {
+    //   ColumnConstraints cc = new ColumnConstraints();
+    //   cc.setPercentWidth(25);
+    //   gp.getColumnConstraints().add(cc);
+    // }
+    // for (int i = 0; i < 5; i++) {
+    //   RowConstraints rc = new RowConstraints();
+    //   rc.setPercentHeight(20);
+    //   gp.getRowConstraints().add(rc);
+    // }
 
     // Button b = new Button("0");
     // b.setMaxWidth(Double.MAX_VALUE);
