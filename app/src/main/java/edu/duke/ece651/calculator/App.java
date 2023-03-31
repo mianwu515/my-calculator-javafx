@@ -71,15 +71,15 @@ public class App extends Application {
       gp.getRowConstraints().add(rc);
     }
 
-    Button b = new Button("0");
-    b.setMaxWidth(Double.MAX_VALUE);
-    b.setMaxHeight(Double.MAX_VALUE);
-    gp.add(b, 0, 4, 2, 1);
+    // Button b = new Button("0");
+    // b.setMaxWidth(Double.MAX_VALUE);
+    // b.setMaxHeight(Double.MAX_VALUE);
+    // gp.add(b, 0, 4, 2, 1);
 
-    b = new Button("E\nn\nt\ne\nr");
-    b.setMaxWidth(Double.MAX_VALUE); // Note this change
-    b.setMaxHeight(Double.MAX_VALUE); // Note this change
-    gp.add(b, 3, 1, 1, 3);
+    // b = new Button("E\nn\nt\ne\nr");
+    // b.setMaxWidth(Double.MAX_VALUE); // Note this change
+    // b.setMaxHeight(Double.MAX_VALUE); // Note this change
+    // gp.add(b, 3, 1, 1, 3);
 
     // Create a scene
     Scene scene = new Scene(gp, 640, 480);
