@@ -1,6 +1,10 @@
 package edu.duke.ece651.calculator;
 
+import java.io.IOException;
+import java.net.URL;
+
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
@@ -10,8 +14,11 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
+  /**
+   * @throws IOException
+   */
   @Override
-  public void start(Stage stage) {
+  public void start(Stage stage) throws IOException {
     String javaVersion = System.getProperty("java.version");
     String javafxVersion = System.getProperty("javafx.version");
     // Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " +
@@ -21,17 +28,6 @@ public class App extends Application {
     // Group root = new Group(circ, l);
 
     // Scene scene = new Scene(root, 640, 480);
-    GridPane gp = new GridPane();
-    for (int i = 0; i < 4; i++) {
-      ColumnConstraints cc = new ColumnConstraints();
-      cc.setPercentWidth(25);
-      gp.getColumnConstraints().add(cc);
-    }
-    for (int i = 0; i < 5; i++) {
-      RowConstraints rc = new RowConstraints();
-      rc.setPercentHeight(20);
-      gp.getRowConstraints().add(rc);
-    }
 
     // gp.add(new Button("+"), 0, 0);
     // gp.add(new Button("-"), 1, 0);
@@ -48,16 +44,31 @@ public class App extends Application {
     // gp.add(new Button("2"), 1, 3);
     // gp.add(new Button("3"), 2, 3);
 
-    String[] labels = new String[] { "+", "-", "*", "/", "7", "8", "9", "4", "5", "6", "1", "2", "3", "." };
+    // String[] labels = new String[] { "+", "-", "*", "/", "7", "8", "9", "4", "5",
+    // "6", "1", "2", "3", "." };
 
-    int rows[] = new int[] { 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4 };
-    int cols[] = new int[] { 0, 1, 2, 3, 0, 1, 2, 0, 1, 2, 0, 1, 2, 2 };
+    // int rows[] = new int[] { 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4 };
+    // int cols[] = new int[] { 0, 1, 2, 3, 0, 1, 2, 0, 1, 2, 0, 1, 2, 2 };
 
-    for (int i = 0; i < labels.length; i++) {
-      Button b = new Button(labels[i]);
-      gp.add(b, cols[i], rows[i]);
-      b.setMaxWidth(Double.MAX_VALUE);
-      b.setMaxHeight(Double.MAX_VALUE);
+    // for (int i = 0; i < labels.length; i++) {
+    // Button b = new Button(labels[i]);
+    // gp.add(b, cols[i], rows[i]);
+    // b.setMaxWidth(Double.MAX_VALUE);
+    // b.setMaxHeight(Double.MAX_VALUE);
+    // }
+
+    // XML
+    URL xmlResource = getClass().getResource("/ui/calcbuttons.xml");
+    GridPane gp = FXMLLoader.load(xmlResource);
+    for (int i = 0; i < 4; i++) {
+      ColumnConstraints cc = new ColumnConstraints();
+      cc.setPercentWidth(25);
+      gp.getColumnConstraints().add(cc);
+    }
+    for (int i = 0; i < 5; i++) {
+      RowConstraints rc = new RowConstraints();
+      rc.setPercentHeight(20);
+      gp.getRowConstraints().add(rc);
     }
 
     Button b = new Button("0");
@@ -70,7 +81,13 @@ public class App extends Application {
     b.setMaxHeight(Double.MAX_VALUE); // Note this change
     gp.add(b, 3, 1, 1, 3);
 
+    // Create a scene
     Scene scene = new Scene(gp, 640, 480);
+
+    // Load the CSS stylesheet
+    URL cssResource = getClass().getResource("/ui/calcbuttons.css");
+    scene.getStylesheets().add(cssResource.toString());
+
     // Scene scene = new Scene(new StackPane(l, circ), 640, 480);
     stage.setTitle("My Calculator Application");
     stage.setScene(scene);

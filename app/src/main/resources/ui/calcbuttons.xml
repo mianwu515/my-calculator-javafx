@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import java.lang.Double?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml">
+  <Button text="+" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="expandable"/>
+  <Button text="-" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="expandable"/>
+  <Button text="*" GridPane.rowIndex="0" GridPane.columnIndex="2" styleClass="expandable"/>
+  <Button text="/" GridPane.rowIndex="0" GridPane.columnIndex="3" styleClass="expandable"/>
+  <Button text="7" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="expandable"/>
+  <Button text="8" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="expandable"/>
+  <Button text="9" GridPane.rowIndex="1" GridPane.columnIndex="2" styleClass="expandable"/>
+  <Button text="4" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="expandable"/>
+  <Button text="5" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="expandable"/>
+  <Button text="6" GridPane.rowIndex="2" GridPane.columnIndex="2" styleClass="expandable"/>
+  <Button text="1" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="expandable"/>
+  <Button text="2" GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="expandable"/>
+  <Button text="3" GridPane.rowIndex="3" GridPane.columnIndex="2" styleClass="expandable"/>
+   <Button text="." GridPane.rowIndex="4" GridPane.columnIndex="2" styleClass="expandable"/>
+</GridPane>
