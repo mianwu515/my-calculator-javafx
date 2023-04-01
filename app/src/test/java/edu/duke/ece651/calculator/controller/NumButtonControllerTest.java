@@ -1,5 +1,9 @@
 package edu.duke.ece651.calculator.controller;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxAssert;
@@ -9,6 +13,7 @@ import org.testfx.framework.junit5.Start;
 import org.testfx.matcher.control.TextInputControlMatchers;
 import org.testfx.util.WaitForAsyncUtils;
 
+import edu.duke.ece651.calculator.model.RPNStack;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -19,12 +24,27 @@ import javafx.stage.Stage;
 public class NumButtonControllerTest {
   private TextField testText;
   private NumButtonController cont;
+  private RPNStack mockedModel;
 
   @Start
   private void start(Stage stage) {
     testText = new TextField();
-    cont = new NumButtonController();
+    mockedModel = mock(RPNStack.class);
+    cont = new NumButtonController(mockedModel);
     cont.currentNumber = testText;
+  }
+
+  @Test
+  void test_enterButton(FxRobot robot) {
+    Platform.runLater(() -> {
+      testText.setText("1234.5");
+      Button b = new Button("Enter");
+      cont.onEnter(new ActionEvent(b, null));
+    });
+    WaitForAsyncUtils.waitForFxEvents();
+    verify(mockedModel).pushNum(1234.5); // verify method pushNum was called
+    verifyNoMoreInteractions(mockedModel); // verify that nothing else was done to the model
+    FxAssert.verifyThat(testText, TextInputControlMatchers.hasText("")); // check states after the action
   }
 
   private void addNums(String... strs) {

@@ -2,7 +2,11 @@ package edu.duke.ece651.calculator;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 
+import edu.duke.ece651.calculator.controller.CalculatorController;
+import edu.duke.ece651.calculator.controller.NumButtonController;
+import edu.duke.ece651.calculator.model.RPNStack;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -57,9 +61,21 @@ public class App extends Application {
     // b.setMaxHeight(Double.MAX_VALUE);
     // }
 
+    RPNStack model = new RPNStack();
     // XML
     URL xmlResource = getClass().getResource("/ui/calc-split.xml");
-    GridPane gp = FXMLLoader.load(xmlResource);
+    FXMLLoader loader = new FXMLLoader(xmlResource);
+
+    HashMap<Class<?>, Object> controllers = new HashMap<>();
+    controllers.put(NumButtonController.class, new NumButtonController(model));
+    controllers.put(CalculatorController.class, new CalculatorController());
+    loader.setControllerFactory((c) -> { // on set the call back func here. the real call happens when loader calls its
+                                         // load() method
+      return controllers.get(c);
+    });
+
+    // GridPane gp = FXMLLoader.load(xmlResource);
+    GridPane gp = loader.load();
     // for (int i = 0; i < 4; i++) {
     // ColumnConstraints cc = new ColumnConstraints();
     // cc.setPercentWidth(25);
