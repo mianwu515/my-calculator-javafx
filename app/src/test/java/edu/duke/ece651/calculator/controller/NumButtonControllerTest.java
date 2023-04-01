@@ -27,14 +27,26 @@ public class NumButtonControllerTest {
     cont.currentNumber = testText;
   }
 
-  @Test
-  public void test_onNumberButton(FxRobot robot) {
+  private void addNums(String... strs) {
     Platform.runLater(() -> {
-      Button b = new Button("7");
-      cont.onNumberButton(new ActionEvent(b, null));
+      for (String s : strs) {
+        Button b = new Button(s);
+        cont.onNumberButton(new ActionEvent(b, null));
+      }
     });
     WaitForAsyncUtils.waitForFxEvents();
+  }
+
+  @Test
+  public void test_onNumberButton_7(FxRobot robot) {
+    addNums("7");
     FxAssert.verifyThat(testText, TextInputControlMatchers.hasText("7"));
+  }
+
+  @Test
+  public void test_onNumberButton_pi(FxRobot robot) {
+    addNums("3", ".", "1", "4");
+    FxAssert.verifyThat(testText, TextInputControlMatchers.hasText("3.14"));
   }
 
 }
