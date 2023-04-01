@@ -12,6 +12,7 @@ import org.testfx.api.FxAssert;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+import org.testfx.matcher.control.ListViewMatchers;
 import org.testfx.matcher.control.TextInputControlMatchers;
 
 import javafx.stage.Stage;
@@ -29,7 +30,7 @@ public class AppTest {
   @Test
   public void test_numButtons(FxRobot robot) {
     FxAssert.verifyThat("#currentNumber", TextInputControlMatchers.hasText(""));
-    String str = "123456.6789";
+    String str = "123450.6789";
     for (char digit : str.toCharArray()) {
       if (digit == '.') {
         robot.clickOn("#dot");
@@ -38,5 +39,10 @@ public class AppTest {
       }
     }
     FxAssert.verifyThat("#currentNumber", TextInputControlMatchers.hasText(str));
+
+    robot.clickOn("#Enter");
+    FxAssert.verifyThat("#currentNumber", TextInputControlMatchers.hasText(""));
+    FxAssert.verifyThat("#rpnstack", ListViewMatchers.hasItems(1));
+    FxAssert.verifyThat("#rpnstack", ListViewMatchers.hasListCell(123450.6789));
   }
 }

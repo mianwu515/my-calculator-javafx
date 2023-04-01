@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -103,6 +104,10 @@ public class App extends Application {
     // Load the CSS stylesheet
     URL cssResource = getClass().getResource("/ui/calcbuttons.css");
     scene.getStylesheets().add(cssResource.toString());
+
+    @SuppressWarnings("unchecked")
+    ListView<Double> operands = (ListView<Double>) scene.lookup("#rpnstack");
+    operands.setItems(model.getList());
 
     // Scene scene = new Scene(new StackPane(l, circ), 640, 480);
     stage.setTitle("My Calculator Application");
