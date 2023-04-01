@@ -62,6 +62,8 @@ public class App extends Application {
     // b.setMaxHeight(Double.MAX_VALUE);
     // }
 
+    Thread.setDefaultUncaughtExceptionHandler(new ErrorReporter());
+
     RPNStack model = new RPNStack();
     // XML
     URL xmlResource = getClass().getResource("/ui/calc-split.xml");
