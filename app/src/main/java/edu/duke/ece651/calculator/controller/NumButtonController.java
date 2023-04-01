@@ -24,10 +24,6 @@ public class NumButtonController {
     currentNumber.setText("");
   }
 
-  public void onEnter(ActionEvent ae) {
-    pushCurrentNumIfAny();
-  }
-
   @FXML
   TextField currentNumber;
 
@@ -42,6 +38,30 @@ public class NumButtonController {
           source +
           " for ActionEvent");
     }
+  }
+
+  public void onEnter(ActionEvent ae) {
+    pushCurrentNumIfAny();
+  }
+
+  public void onPlus(ActionEvent ae) {
+    pushCurrentNumIfAny();
+    model.add();
+  }
+
+  public void onSubtract(ActionEvent ae) {
+    pushCurrentNumIfAny();
+    model.subtract();
+  }
+
+  public void onTimes(ActionEvent ae) {
+    pushCurrentNumIfAny();
+    model.times();
+  }
+
+  public void onDivide(ActionEvent ae) {
+    pushCurrentNumIfAny();
+    model.divide();
   }
 
 }

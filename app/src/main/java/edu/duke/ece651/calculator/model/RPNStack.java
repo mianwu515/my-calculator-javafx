@@ -32,7 +32,6 @@ public class RPNStack {
     double d1 = myStack.remove(myStack.size()-1);
     double d2 = myStack.remove(myStack.size()-1);
     myStack.add(op.apply(d2, d1));
-
   }
 
   public void add() {

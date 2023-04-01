@@ -27,22 +27,53 @@ public class AppTest {
     a.start(stage);
   }
 
-  @Test
-  public void test_numButtons(FxRobot robot) {
-    FxAssert.verifyThat("#currentNumber", TextInputControlMatchers.hasText(""));
-    String str = "123450.6789";
+  private void clickButtonsFor(String str, FxRobot robot) {
     for (char digit : str.toCharArray()) {
       if (digit == '.') {
         robot.clickOn("#dot");
       } else {
-        robot.clickOn("" + digit); // click on a mouse button
+        robot.clickOn("" + digit);
       }
     }
-    FxAssert.verifyThat("#currentNumber", TextInputControlMatchers.hasText(str));
+  }
 
+  void test_button_helper(FxRobot robot, String btnName, String inp1,
+      String inp2, double ans, boolean useEnter) {
+    clickButtonsFor(inp1, robot);
     robot.clickOn("#Enter");
+    clickButtonsFor(inp2, robot);
+    if (useEnter) {
+      robot.clickOn("#Enter");
+    }
+    robot.clickOn(btnName);
     FxAssert.verifyThat("#currentNumber", TextInputControlMatchers.hasText(""));
     FxAssert.verifyThat("#rpnstack", ListViewMatchers.hasItems(1));
-    FxAssert.verifyThat("#rpnstack", ListViewMatchers.hasListCell(123450.6789));
+    FxAssert.verifyThat("#rpnstack", ListViewMatchers.hasListCell(ans));
   }
+
+  @Test
+  void test_plusButton_wo_enter(FxRobot robot) {
+    test_button_helper(robot, "#plus", "123.5", "234.25", 357.75, false);
+  }
+
+  @Test
+  void test_plusButton_w_enter(FxRobot robot) {
+    test_button_helper(robot, "#plus", "93.7", "24.3", 118, true);
+  }
+
+  @Test
+  void test_subtractButton_wo_enter(FxRobot robot) {
+    test_button_helper(robot, "#minus", "5", "2", 3, false);
+  }
+
+  @Test
+  void test_timesButton_wo_enter(FxRobot robot) {
+    test_button_helper(robot, "#times", "2", "5", 10, false);
+  }
+
+  @Test
+  void test_divButton_wo_enter(FxRobot robot) {
+    test_button_helper(robot, "#div", "2", "5", 0.4, false);
+  }
+
 }
